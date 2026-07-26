@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer-when-downgrade" />
-  <title>macOS — GTA 6 Mobile Installer</title>
+  <title>macOS WebOS — Complete System Simulation</title>
 
   <style>
     :root {
       --mac-topbar: rgba(30, 41, 59, 0.75);
-      --mac-window-bg: rgba(15, 23, 42, 0.85);
+      --mac-window-bg: rgba(15, 23, 42, 0.9);
       --mac-border: rgba(255, 255, 255, 0.15);
       --mac-accent: #007aff;
     }
@@ -26,19 +26,110 @@
       height: 100%;
       overflow: hidden;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      background: #000;
+      color: #fff;
+    }
+
+    /* 1. BOOT SCREEN */
+    #boot-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      z-index: 999999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.8s ease-out;
+    }
+    .boot-apple-logo {
+      font-size: 72px;
+      margin-bottom: 40px;
+      color: #fff;
+    }
+    .boot-progress-bg {
+      width: 220px;
+      height: 5px;
+      background: #333;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .boot-progress-fill {
+      width: 0%;
+      height: 100%;
+      background: #fff;
+      transition: width 0.1s linear;
+    }
+
+    /* 2. LOGIN SCREEN */
+    #login-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 50%, #4a5568, #1a202c);
+      z-index: 99998;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease-out;
+    }
+    .login-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #007aff, #00d2ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
+      margin-bottom: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .login-username {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .login-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      padding: 10px 30px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: background 0.2s;
+    }
+    .login-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* 3. MACOS DESKTOP ENVIRONMENT */
+    #desktop-screen {
+      width: 100vw;
+      height: 100vh;
       background: radial-gradient(circle at 20% 20%, #ff758c, transparent 40%),
                   radial-gradient(circle at 80% 80%, #ff7eb3, transparent 40%),
                   radial-gradient(circle at 50% 50%, #6573ed, #141738);
       background-size: cover;
-      color: #fff;
+      display: flex;
+      flex-direction: column;
+      position: relative;
     }
 
-    /* macOS Top Menu Bar */
+    /* Top Menu Bar */
     .mac-menubar {
       height: 30px;
       background: var(--mac-topbar);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -47,40 +138,60 @@
       font-weight: 500;
       border-bottom: 1px solid var(--mac-border);
       position: relative;
-      z-index: 10000;
+      z-index: 90000;
     }
     .menubar-left {
       display: flex;
       align-items: center;
       gap: 18px;
     }
-    .apple-logo {
-      font-size: 16px;
-      font-weight: bold;
+    .menubar-item {
+      cursor: pointer;
+      position: relative;
+    }
+    .menubar-item:hover {
+      color: var(--mac-accent);
     }
     .menubar-right {
       display: flex;
       align-items: center;
       gap: 15px;
       font-size: 12px;
-      color: rgba(255, 255, 255, 0.9);
     }
 
-    /* Desktop Area */
-    .mac-desktop {
-      height: calc(100vh - 30px - 80px);
+    /* Dropdown Menus */
+    .dropdown-menu {
+      position: absolute;
+      top: 30px;
+      left: 0;
+      background: rgba(30, 41, 59, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--mac-border);
+      border-radius: 6px;
+      padding: 5px 0;
+      min-width: 180px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      display: none;
+    }
+    .dropdown-item {
+      padding: 6px 15px;
+      font-size: 13px;
+      color: #fff;
+    }
+    .dropdown-item:hover {
+      background: var(--mac-accent);
+    }
+
+    /* Desktop Window Container */
+    .desktop-area {
+      flex: 1;
       position: relative;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      overflow: hidden;
     }
 
-    /* macOS Window */
+    /* Windows */
     .mac-window {
-      width: 90%;
-      max-width: 960px;
-      height: 85%;
+      position: absolute;
       background: var(--mac-window-bg);
       backdrop-filter: blur(30px);
       -webkit-backdrop-filter: blur(30px);
@@ -90,14 +201,8 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      animation: popWindow 0.4s ease-out;
+      z-index: 10;
     }
-    @keyframes popWindow {
-      from { transform: scale(0.9); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    /* Window Title Bar */
     .window-titlebar {
       height: 38px;
       background: rgba(255, 255, 255, 0.05);
@@ -106,6 +211,7 @@
       align-items: center;
       padding: 0 15px;
       position: relative;
+      cursor: move;
     }
     .traffic-lights {
       display: flex;
@@ -115,10 +221,11 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
+      cursor: pointer;
     }
-    .light-close { background: #ff5f56; border: 1px solid #e0443e; }
-    .light-min { background: #ffbd2e; border: 1px solid #dea123; }
-    .light-max { background: #27c93f; border: 1px solid #1aab29; }
+    .light-close { background: #ff5f56; }
+    .light-min { background: #ffbd2e; }
+    .light-max { background: #27c93f; }
     .window-title {
       position: absolute;
       left: 50%;
@@ -127,41 +234,74 @@
       font-weight: 600;
       color: rgba(255, 255, 255, 0.8);
     }
-
-    /* Window Content Body */
     .window-body {
       flex: 1;
-      padding: 20px;
+      padding: 15px;
       overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
     }
 
-    /* Download Box */
-    .installer-box {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--mac-border);
-      border-radius: 10px;
-      padding: 25px;
-      text-align: center;
+    /* Terminal App Specific */
+    .terminal-body {
+      background: #000;
+      color: #00ff66;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px;
+      padding: 15px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
-    .download-btn {
-      display: inline-block;
-      background: linear-gradient(135deg, #007aff, #0051a8);
+    .terminal-output {
+      flex: 1;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    .terminal-input-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .terminal-input {
+      background: transparent;
+      border: none;
+      color: #00ff66;
+      font-family: inherit;
+      font-size: 13px;
+      width: 100%;
+      outline: none;
+    }
+
+    /* Calculator App Specific */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      max-width: 240px;
+      margin: 0 auto;
+    }
+    .calc-screen {
+      grid-column: span 4;
+      background: #000;
+      color: #fff;
+      font-size: 28px;
+      text-align: right;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .calc-btn {
+      background: rgba(255,255,255,0.15);
+      border: none;
       color: #fff;
       font-size: 18px;
-      font-weight: 700;
-      padding: 14px 35px;
-      border-radius: 30px;
-      text-decoration: none;
-      box-shadow: 0 8px 20px rgba(0, 122, 255, 0.4);
-      transition: transform 0.2s;
+      padding: 15px;
+      border-radius: 6px;
       cursor: pointer;
+      text-align: center;
     }
-    .download-btn:hover {
-      transform: scale(1.03);
-    }
+    .calc-btn:hover { background: rgba(255,255,255,0.3); }
+    .calc-btn.op { background: #ff9500; }
 
     /* macOS Floating Dock */
     .mac-dock {
@@ -179,7 +319,7 @@
       display: flex;
       align-items: center;
       gap: 15px;
-      z-index: 10000;
+      z-index: 90000;
     }
     .dock-icon {
       width: 48px;
@@ -197,7 +337,7 @@
       transform: translateY(-10px) scale(1.2);
     }
 
-    /* macOS Notification Center Widget */
+    /* macOS Notification Center Center Widget (Ad Slot) */
     .mac-notification {
       position: fixed;
       top: 40px;
@@ -210,7 +350,7 @@
       border-radius: 14px;
       padding: 12px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-      z-index: 9999;
+      z-index: 80000;
     }
     .notification-header {
       display: flex;
@@ -221,105 +361,283 @@
       margin-bottom: 8px;
     }
   </style>
+</head>
+<body>
+
+  <!-- 1. BOOT SCREEN -->
+  <div id="boot-screen">
+    <div class="boot-apple-logo"></div>
+    <div class="boot-progress-bg">
+      <div class="boot-progress-fill" id="boot-fill"></div>
+    </div>
+  </div>
+
+  <!-- 2. LOGIN SCREEN -->
+  <div id="login-screen" style="display: none; opacity: 0;">
+    <div class="login-avatar">🧑‍💻</div>
+    <div class="login-username">Administrator</div>
+    <button class="login-btn" onclick="completeLogin()">Click to Login</button>
+  </div>
+
+  <!-- 3. DESKTOP ENVIRONMENT -->
+  <div id="desktop-screen" style="display: none;">
+    
+    <!-- Top Menu Bar -->
+    <div class="mac-menubar">
+      <div class="menubar-left">
+        <div class="menubar-item" onclick="toggleDropdown('apple-menu')">
+          <div class="dropdown-menu" id="apple-menu">
+            <div class="dropdown-item" onclick="openApp('settings-win')">About This Mac</div>
+            <div class="dropdown-item" onclick="openApp('settings-win')">System Settings...</div>
+            <div class="dropdown-item" onclick="location.reload()">Restart...</div>
+          </div>
+        </div>
+        <span style="font-weight: 700;">Finder</span>
+        <span>File</span>
+        <span>Edit</span>
+        <span>View</span>
+        <span>Go</span>
+        <span>Window</span>
+        <span>Help</span>
+      </div>
+      <div class="menubar-right">
+        <span>🔋 100%</span>
+        <span>📡 Wi-Fi</span>
+        <span>🔍</span>
+        <span id="mac-clock">Sun Jul 26 04:15 AM</span>
+      </div>
+    </div>
+
+    <!-- Desktop Area with Windows -->
+    <div class="desktop-area" id="desktop-area">
+      
+      <!-- Window 1: GTA 6 Installer App -->
+      <div class="mac-window" id="gta-win" style="top: 40px; left: 50px; width: 680px; height: 480px;">
+        <div class="window-titlebar">
+          <div class="traffic-lights">
+            <div class="light light-close" onclick="closeApp('gta-win')"></div>
+            <div class="light light-min" onclick="closeApp('gta-win')"></div>
+            <div class="light light-max"></div>
+          </div>
+          <div class="window-title">GTA VI Mobile Beta Installer — v1.0.4</div>
+        </div>
+        <div class="window-body">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=728x90" style="border:0; padding:0; width:100%; height:90px; overflow:hidden; background-color: transparent;"></iframe>
+          </div>
+          <div style="background: rgba(255,255,255,0.05); border: 1px solid var(--mac-border); border-radius: 10px; padding: 20px; text-align: center;">
+            <h2>Grand Theft Auto VI Mobile</h2>
+            <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin: 10px 0 20px 0;">Official Public Beta Package for macOS, Android & iOS.</p>
+            <button onclick="alert('Starting High-Speed Download... Check your Downloads folder.')" style="background: #007aff; color: #fff; border: none; font-size: 16px; font-weight: bold; padding: 12px 30px; border-radius: 25px; cursor: pointer;">
+              ⚡ INSTALL GTA6_MOBILE_V1.0.4.DMG (84.2 MB)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Window 2: Terminal App -->
+      <div class="mac-window" id="terminal-win" style="top: 80px; left: 220px; width: 550px; height: 350px; display: none;">
+        <div class="window-titlebar">
+          <div class="traffic-lights">
+            <div class="light light-close" onclick="closeApp('terminal-win')"></div>
+            <div class="light light-min" onclick="closeApp('terminal-win')"></div>
+            <div class="light light-max"></div>
+          </div>
+          <div class="window-title">Terminal — zsh — 80x24</div>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-output" id="term-output">Last login: Sun Jul 26 04:15:00 on ttys000
+Type 'help' or 'ls' for commands.</div>
+          <div class="terminal-input-line">
+            <span>admin@macbook-pro ~ %</span>
+            <input type="text" class="terminal-input" id="term-input" onkeydown="handleTerminalCommand(event)">
+          </div>
+        </div>
+      </div>
+
+      <!-- Window 3: Safari Browser App -->
+      <div class="mac-window" id="safari-win" style="top: 60px; left: 120px; width: 720px; height: 450px; display: none;">
+        <div class="window-titlebar">
+          <div class="traffic-lights">
+            <div class="light light-close" onclick="closeApp('safari-win')"></div>
+            <div class="light light-min" onclick="closeApp('safari-win')"></div>
+            <div class="light light-max"></div>
+          </div>
+          <div class="window-title">Safari — Web Browser</div>
+        </div>
+        <div class="window-body" style="padding: 0; display: flex; flex-direction: column;">
+          <div style="background: rgba(255,255,255,0.08); padding: 8px 15px; border-bottom: 1px solid var(--mac-border); display: flex; align-items: center; gap: 10px;">
+            <span style="color: rgba(255,255,255,0.6);">🔒 https://acceptable.a-ads.com</span>
+          </div>
+          <div style="flex: 1; padding: 15px; display: flex; justify-content: center; align-items: center;">
+            <iframe data-aa="67018" src="//acceptable.a-ads.com/67018/?size=300x250" style="border:0; padding:0; width:300px; height:250px; overflow:hidden; background-color: transparent;"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Window 4: Calculator App -->
+      <div class="mac-window" id="calc-win" style="top: 100px; left: 400px; width: 280px; height: 360px; display: none;">
+        <div class="window-titlebar">
+          <div class="traffic-lights">
+            <div class="light light-close" onclick="closeApp('calc-win')"></div>
+            <div class="light light-min" onclick="closeApp('calc-win')"></div>
+            <div class="light light-max"></div>
+          </div>
+          <div class="window-title">Calculator</div>
+        </div>
+        <div class="window-body">
+          <div class="calc-screen" id="calc-display">0</div>
+          <div class="calc-grid">
+            <button class="calc-btn" onclick="calcInput('C')">C</button>
+            <button class="calc-btn" onclick="calcInput('/')">/</button>
+            <button class="calc-btn" onclick="calcInput('*')">*</button>
+            <button class="calc-btn op" onclick="calcInput('-')">-</button>
+            <button class="calc-btn" onclick="calcInput('7')">7</button>
+            <button class="calc-btn" onclick="calcInput('8')">8</button>
+            <button class="calc-btn" onclick="calcInput('9')">9</button>
+            <button class="calc-btn op" onclick="calcInput('+')">+</button>
+            <button class="calc-btn" onclick="calcInput('4')">4</button>
+            <button class="calc-btn" onclick="calcInput('5')">5</button>
+            <button class="calc-btn" onclick="calcInput('6')">6</button>
+            <button class="calc-btn op" onclick="calcInput('=')">=</button>
+            <button class="calc-btn" onclick="calcInput('1')">1</button>
+            <button class="calc-btn" onclick="calcInput('2')">2</button>
+            <button class="calc-btn" onclick="calcInput('3')">3</button>
+            <button class="calc-btn" onclick="calcInput('0')">0</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- macOS Floating Notification Center Ad Widget -->
+    <div class="mac-notification">
+      <div class="notification-header">
+        <span>SYSTEM NOTIFICATION</span>
+        <span>now</span>
+      </div>
+      <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=Adaptive" style="border:0; padding:0; width:100%; height:120px; overflow:hidden; background-color: transparent;"></iframe>
+    </div>
+
+    <!-- macOS Bottom Dock -->
+    <div class="mac-dock">
+      <div class="dock-icon" title="Finder" onclick="openApp('gta-win')">📁</div>
+      <div class="dock-icon" title="Safari" onclick="openApp('safari-win')">🌐</div>
+      <div class="dock-icon" title="Terminal" onclick="openApp('terminal-win')">💻</div>
+      <div class="dock-icon" title="Calculator" onclick="openApp('calc-win')">🔢</div>
+      <div class="dock-icon" title="GTA 6 Installer" onclick="openApp('gta-win')">🎮</div>
+      <div class="dock-icon" title="Trash" onclick="alert('Trash is empty.')">🗑️</div>
+    </div>
+
+  </div>
 
   <script>
-    // Real-Time macOS Clock
+    // BOOT SEQUENCE SIMULATION
+    let progress = 0;
+    const bootFill = document.getElementById("boot-fill");
+    const bootInterval = setInterval(function() {
+      progress += Math.floor(Math.random() * 15) + 5;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(bootInterval);
+        setTimeout(function() {
+          const bs = document.getElementById("boot-screen");
+          bs.style.opacity = "0";
+          setTimeout(function() {
+            bs.style.display = "none";
+            const ls = document.getElementById("login-screen");
+            ls.style.display = "flex";
+            setTimeout(function() { ls.style.opacity = "1"; }, 50);
+          }, 800);
+        }, 300);
+      }
+      bootFill.style.width = progress + "%";
+    }, 120);
+
+    function completeLogin() {
+      const ls = document.getElementById("login-screen");
+      ls.style.opacity = "0";
+      setTimeout(function() {
+        ls.style.display = "none";
+        document.getElementById("desktop-screen").style.display = "flex";
+      }, 500);
+    }
+
+    // CLOCK & WINDOW CONTROLS
     function updateClock() {
       const now = new Date();
       const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
       document.getElementById('mac-clock').innerText = now.toLocaleDateString('en-US', options);
     }
     setInterval(updateClock, 1000);
-    document.addEventListener("DOMContentLoaded", updateClock);
 
-    function startDownload() {
-      alert("Preparing high-speed installer package... Download will begin shortly.");
+    function openApp(id) {
+      const win = document.getElementById(id);
+      win.style.display = "flex";
+      win.style.zIndex = Math.floor(Date.now() / 1000) % 10000;
+    }
+    function closeApp(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    function toggleDropdown(id) {
+      const menu = document.getElementById(id);
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    }
+
+    // TERMINAL COMMAND SIMULATOR
+    function handleTerminalCommand(e) {
+      if (e.key === "Enter") {
+        const input = document.getElementById("term-input");
+        const out = document.getElementById("term-output");
+        const cmd = input.value.trim().toLowerCase();
+        let res = "\nadmin@macbook-pro ~ % " + input.value + "\n";
+        
+        if (cmd === "ls") {
+          res += "GTA6_MOBILE_V1.0.4.DMG   Applications   Downloads   Documents";
+        } else if (cmd === "whoami") {
+          res += "administrator (root access granted)";
+        } else if (cmd === "help") {
+          res += "Available commands: ls, whoami, clear, uname, date";
+        } else if (cmd === "clear") {
+          out.innerText = "";
+          input.value = "";
+          return;
+        } else if (cmd === "uname") {
+          res += "Darwin Kernel Version 23.5.0: x86_64/arm64";
+        } else if (cmd === "date") {
+          res += new Date().toString();
+        } else if (cmd !== "") {
+          res += "zsh: command not found: " + cmd;
+        }
+        
+        out.innerText += res;
+        input.value = "";
+        out.scrollTop = out.scrollHeight;
+      }
+    }
+
+    // CALCULATOR APP SIMULATOR
+    let calcExpr = "";
+    function calcInput(val) {
+      const disp = document.getElementById("calc-display");
+      if (val === 'C') {
+        calcExpr = "";
+        disp.innerText = "0";
+      } else if (val === '=') {
+        try {
+          calcExpr = eval(calcExpr).toString();
+          disp.innerText = calcExpr;
+        } catch(err) {
+          disp.innerText = "Error";
+          calcExpr = "";
+        }
+      } else {
+        calcExpr += val;
+        disp.innerText = calcExpr;
+      }
     }
   </script>
-</head>
-<body>
-
-  <!-- macOS Top Menu Bar -->
-  <div class="mac-menubar">
-    <div class="menubar-left">
-      <span class="apple-logo"></span>
-      <span style="font-weight: 700;">Finder</span>
-      <span>File</span>
-      <span>Edit</span>
-      <span>View</span>
-      <span>Go</span>
-      <span>Window</span>
-      <span>Help</span>
-    </div>
-    <div class="menubar-right">
-      <span>🔋 100%</span>
-      <span>📡 Wi-Fi</span>
-      <span>🔍</span>
-      <span id="mac-clock">Sun Jul 26 04:15 AM</span>
-    </div>
-  </div>
-
-  <!-- macOS Desktop Body -->
-  <div class="mac-desktop">
-    
-    <!-- Main macOS Window -->
-    <div class="mac-window">
-      <div class="window-titlebar">
-        <div class="traffic-lights">
-          <div class="light light-close"></div>
-          <div class="light light-min"></div>
-          <div class="light light-max"></div>
-        </div>
-        <div class="window-title">GTA VI Mobile Beta Installer — v1.0.4</div>
-      </div>
-
-      <div class="window-body">
-        
-        <!-- Top Ad Leaderboard Inside Window -->
-        <div style="text-align: center;">
-          <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=728x90" style="border:0; padding:0; width:728px; height:90px; overflow:hidden; background-color: transparent;"></iframe>
-        </div>
-
-        <!-- Download Installer Card -->
-        <div class="installer-box">
-          <h2 style="margin-bottom: 8px;">Grand Theft Auto VI Mobile</h2>
-          <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin-bottom: 20px;">
-            Official Public Beta Package for macOS, Android & iOS. Verified Virus-Free by Gatekeeper.
-          </p>
-
-          <button onclick="startDownload()" class="download-btn">
-            ⚡ INSTALL GTA6_MOBILE_V1.0.4.DMG (84.2 MB)
-          </button>
-        </div>
-
-        <!-- Secondary Ad Grid Inside Window -->
-        <div style="display: flex; gap: 20px; justify-content: center;">
-          <iframe data-aa="67018" src="//acceptable.a-ads.com/67018/?size=300x250" style="border:0; padding:0; width:300px; height:250px; overflow:hidden; background-color: transparent;"></iframe>
-          <iframe data-aa="200000" src="//acceptable.a-ads.com/200000/?size=300x250" style="border:0; padding:0; width:300px; height:250px; overflow:hidden; background-color: transparent;"></iframe>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- macOS Floating Notification Center Ad Widget -->
-  <div class="mac-notification">
-    <div class="notification-header">
-      <span>SYSTEM NOTIFICATION</span>
-      <span>now</span>
-    </div>
-    <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=Adaptive" style="border:0; padding:0; width:100%; height:120px; overflow:hidden; background-color: transparent;"></iframe>
-  </div>
-
-  <!-- macOS Bottom Dock -->
-  <div class="mac-dock">
-    <div class="dock-icon" title="Finder">📁</div>
-    <div class="dock-icon" title="Safari">🌐</div>
-    <div class="dock-icon" title="Terminal">💻</div>
-    <div class="dock-icon" title="System Settings">⚙️</div>
-    <div class="dock-icon" title="Downloads">📥</div>
-    <div class="dock-icon" title="Trash">🗑️</div>
-  </div>
 
 </body>
 </html>
