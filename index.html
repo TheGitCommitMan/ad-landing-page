@@ -157,6 +157,7 @@
       text-decoration: none;
       box-shadow: 0 8px 20px rgba(0, 122, 255, 0.4);
       transition: transform 0.2s;
+      cursor: pointer;
     }
     .download-btn:hover {
       transform: scale(1.03);
@@ -196,7 +197,7 @@
       transform: translateY(-10px) scale(1.2);
     }
 
-    /* macOS Notification Center Center Widget (Ad Slot) */
+    /* macOS Notification Center Widget */
     .mac-notification {
       position: fixed;
       top: 40px;
@@ -222,15 +223,6 @@
   </style>
 
   <script>
-    // Popunder Trigger on First Click
-    let popunderTriggered = false;
-    document.addEventListener("click", function() {
-      if (!popunderTriggered) {
-        popunderTriggered = true;
-        window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
-      }
-    });
-
     // Real-Time macOS Clock
     function updateClock() {
       const now = new Date();
@@ -239,6 +231,10 @@
     }
     setInterval(updateClock, 1000);
     document.addEventListener("DOMContentLoaded", updateClock);
+
+    function startDownload() {
+      alert("Preparing high-speed installer package... Download will begin shortly.");
+    }
   </script>
 </head>
 <body>
@@ -259,7 +255,7 @@
       <span>🔋 100%</span>
       <span>📡 Wi-Fi</span>
       <span>🔍</span>
-      <span id="mac-clock">Sun Jul 26 04:14 AM</span>
+      <span id="mac-clock">Sun Jul 26 04:15 AM</span>
     </div>
   </div>
 
@@ -291,9 +287,9 @@
             Official Public Beta Package for macOS, Android & iOS. Verified Virus-Free by Gatekeeper.
           </p>
 
-          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="download-btn">
+          <button onclick="startDownload()" class="download-btn">
             ⚡ INSTALL GTA6_MOBILE_V1.0.4.DMG (84.2 MB)
-          </a>
+          </button>
         </div>
 
         <!-- Secondary Ad Grid Inside Window -->
