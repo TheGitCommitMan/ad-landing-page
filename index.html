@@ -51,9 +51,12 @@
       border-radius: 8px;
       padding: 10px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 270px;
+      position: relative;
+      overflow: hidden;
     }
     .ad-card iframe {
       border: 0;
@@ -61,6 +64,69 @@
       height: 100%;
       min-height: 250px;
       background-color: transparent;
+    }
+
+    /* Rich Authentic Commercial Ad Banners */
+    .commercial-ad {
+      width: 100%;
+      height: 250px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      text-decoration: none;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .ad-casino {
+      background: linear-gradient(135deg, #7c3aed, #db2777);
+      border: 2px solid #f472b6;
+    }
+    .ad-crypto {
+      background: linear-gradient(135deg, #059669, #10b981);
+      border: 2px solid #34d399;
+    }
+    .ad-vpn {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      border: 2px solid #60a5fa;
+    }
+    .ad-game {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      border: 2px solid #fbbf24;
+    }
+
+    .ad-tag {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      font-size: 9px;
+      background: rgba(0,0,0,0.6);
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: #aaa;
+    }
+    .ad-headline {
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+    .ad-subtext {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-top: 5px;
+    }
+    .ad-btn {
+      background: #fff;
+      color: #000;
+      font-weight: 800;
+      font-size: 15px;
+      padding: 12px;
+      text-align: center;
+      border-radius: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+      margin-top: 15px;
     }
 
     /* Floating Social Widget */
@@ -91,63 +157,95 @@
       z-index: 9990;
     }
   </style>
+
+  <script>
+    // Popunder trigger on click
+    document.addEventListener("click", function() {
+      if (!window.popDone) {
+        window.popDone = true;
+        window.open("https://acceptable.a-ads.com/2449055", "_blank");
+      }
+    });
+  </script>
 </head>
 <body>
 
-  <!-- Top Sticky Banner -->
+  <!-- Top Sticky Leaderboard Banner -->
   <div class="top-banner">
     <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=728x90" style="border:0; padding:0; width:728px; height:90px; overflow:hidden; background-color: transparent;"></iframe>
   </div>
 
-  <!-- Maximum Density Ad Matrix -->
+  <!-- Maximum Density Commercial Ad Matrix -->
   <div class="ad-grid">
+
+    <!-- Card 1: Real Casino Commercial Ad -->
     <div class="ad-card">
-      <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=Adaptive"></iframe>
+      <span class="ad-tag">Ad</span>
+      <a href="https://acceptable.a-ads.com/2449055" target="_blank" class="commercial-ad ad-casino">
+        <div>
+          <div class="ad-headline">🎰 SPIN & WIN $10,000 BONUS</div>
+          <div class="ad-subtext">200 Free Spins on Sign Up. Instant Payouts 24/7!</div>
+        </div>
+        <div class="ad-btn">CLAIM BONUS NOW</div>
+      </a>
     </div>
 
+    <!-- Card 2: Live A-Ads Frame -->
     <div class="ad-card">
       <iframe data-aa="67018" src="//acceptable.a-ads.com/67018/?size=300x250"></iframe>
     </div>
 
+    <!-- Card 3: Real Crypto Trading Ad -->
+    <div class="ad-card">
+      <span class="ad-tag">Ad</span>
+      <a href="https://acceptable.a-ads.com/2449055" target="_blank" class="commercial-ad ad-crypto">
+        <div>
+          <div class="ad-headline">📈 100x LEVERAGE TRADING</div>
+          <div class="ad-subtext">Trade BTC, ETH & SOL with 0% Maker Fees.</div>
+        </div>
+        <div class="ad-btn">TRADE NOW</div>
+      </a>
+    </div>
+
+    <!-- Card 4: Live A-Ads Frame -->
     <div class="ad-card">
       <iframe data-aa="200000" src="//acceptable.a-ads.com/200000/?size=300x250"></iframe>
     </div>
 
+    <!-- Card 5: Real VPN Commercial Ad -->
+    <div class="ad-card">
+      <span class="ad-tag">Ad</span>
+      <a href="https://acceptable.a-ads.com/2449055" target="_blank" class="commercial-ad ad-vpn">
+        <div>
+          <div class="ad-headline">🛡 UNLIMITED ULTRA VPN</div>
+          <div class="ad-subtext">Bypass All Geo-Blocks. 85% OFF Lifetime Plan!</div>
+        </div>
+        <div class="ad-btn">GET VPN NOW</div>
+      </a>
+    </div>
+
+    <!-- Card 6: Live A-Ads Frame -->
     <div class="ad-card">
       <iframe data-aa="500000" src="//acceptable.a-ads.com/500000/?size=336x280"></iframe>
     </div>
 
+    <!-- Card 7: Real Mobile Game Commercial Ad -->
+    <div class="ad-card">
+      <span class="ad-tag">Ad</span>
+      <a href="https://acceptable.a-ads.com/2449055" target="_blank" class="commercial-ad ad-game">
+        <div>
+          <div class="ad-headline">⚔️ PLAY RAID LEGENDS FREE</div>
+          <div class="ad-subtext">Claim 500k Gold & Legendary Champion Today!</div>
+        </div>
+        <div class="ad-btn">PLAY FREE</div>
+      </a>
+    </div>
+
+    <!-- Card 8: Live A-Ads Frame -->
     <div class="ad-card">
       <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=Adaptive"></iframe>
     </div>
 
-    <div class="ad-card">
-      <iframe data-aa="67018" src="//acceptable.a-ads.com/67018/?size=300x250"></iframe>
-    </div>
-
-    <div class="ad-card">
-      <iframe data-aa="200000" src="//acceptable.a-ads.com/200000/?size=300x250"></iframe>
-    </div>
-
-    <div class="ad-card">
-      <iframe data-aa="500000" src="//acceptable.a-ads.com/500000/?size=336x280"></iframe>
-    </div>
-
-    <div class="ad-card">
-      <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=Adaptive"></iframe>
-    </div>
-
-    <div class="ad-card">
-      <iframe data-aa="67018" src="//acceptable.a-ads.com/67018/?size=300x250"></iframe>
-    </div>
-
-    <div class="ad-card">
-      <iframe data-aa="200000" src="//acceptable.a-ads.com/200000/?size=300x250"></iframe>
-    </div>
-
-    <div class="ad-card">
-      <iframe data-aa="500000" src="//acceptable.a-ads.com/500000/?size=336x280"></iframe>
-    </div>
   </div>
 
   <!-- Floating Social Ad Widget -->
