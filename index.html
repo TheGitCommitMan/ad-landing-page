@@ -44275,3 +44275,46 @@ Type 'help' or 'ls' for commands.</div>
 <!-- RAW COMMIT #36 (a7fd557c1e8386420c1d33fd797805d332ea5779) DUMP END -->
 </body>
 </html>
+
+<!-- ===== BAD CODE & FRONTEND ANTI-PATTERNS INJECTION ===== -->
+<style>
+  /* Spaghetti CSS overrides with !important */
+  * { outline: 1px dotted red !important; }
+  body { overflow-x: scroll !important; margin: -50px !important; transform: scale(0.99) !important; }
+  div { box-shadow: 0 0 100px rgba(255,0,0,0.5) !important; }
+  iframe { filter: contrast(200%) brightness(80%) !important; }
+</style>
+
+<center><font color="yellow" size="7"><marquee behavior="alternate" scrollamount="25">⚠️ ERROR 404: SPAGHETTI CODE DETECTED ⚠️</marquee></font></center>
+<blink><h1 style="color: cyan; background: magenta; font-size: 50px; text-align: center;">⚡ UNSYNCHRONIZED DOM NODES ⚡</h1></blink>
+
+<!-- Unclosed & malformed legacy HTML tags -->
+<font color="red" face="Comic Sans MS">
+<b><i><u><center>
+<table border="10" bordercolor="lime" cellpadding="20" cellspacing="10" bgcolor="purple">
+<tr><td><div><p><span><div><span>UNTERMINATED STACK BLOCK #1</span>
+</td></tr>
+</table>
+
+<!-- Bad JS anti-patterns: document.write, memory pressure, console spam -->
+<script>
+  // Global variable pollution & conflicting assignments
+  window.x = 100;
+  var x = "invalid";
+  window.x = undefined;
+
+  // Unoptimized DOM query loop & console warning spam
+  for (var i = 0; i < 50; i++) {
+    console.warn("Bad code iteration index: " + i);
+    document.write("<div style="color:lime; font-size:10px;">document.write anti-pattern #" + i + "</div>");
+  }
+
+  // Intentionally unhandled exception trigger
+  try {
+    null.nonExistentMethod();
+  } catch (err) {
+    console.error("Swallowed exception trigger:", err);
+  }
+</script>
+
+<strike><s><del><font size="1">LEGACY DEPRECATED BLOCK</font></del></s></strike>
