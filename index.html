@@ -17,32 +17,7 @@
       background-color: #05050a;
       color: #ffffff;
       font-family: system-ui, -apple-system, sans-serif;
-    }
-    .ad-wrapper {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 15px;
-      padding: 15px;
-      width: 100%;
-      max-width: 1600px;
-      margin: 0 auto;
-    }
-    .ad-box {
-      background: #111827;
-      border: 1px solid #1f2937;
-      border-radius: 6px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 250px;
-      position: relative;
-    }
-    .ad-box iframe {
-      border: 0;
-      width: 100%;
-      height: 100%;
-      min-height: 250px;
+      overflow-x: hidden;
     }
     .sticky-top-ad {
       position: sticky;
@@ -55,6 +30,92 @@
       justify-content: center;
       padding: 5px;
     }
+    .ad-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 15px;
+      padding: 15px;
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding-bottom: 120px;
+    }
+    .ad-box {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 250px;
+    }
+    .ad-box iframe {
+      border: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 250px;
+    }
+    
+    /* Social Bar & Notification Popup Styles */
+    .social-bar-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 340px;
+      width: 100%;
+    }
+    .social-popup {
+      background: #1e293b;
+      border: 1px solid #3b82f6;
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      animation: slideIn 0.4s ease-out;
+      position: relative;
+    }
+    .social-popup-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #3b82f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .popup-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .popup-subtitle {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    .close-btn {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -65,44 +126,28 @@
   </div>
 
   <div class="ad-wrapper">
-    <!-- Public Live Ad Frame 1 -->
-    <div class="ad-box">
-      <iframe src="https://acceptable.a-ads.com/2449055/?size=Adaptive"></iframe>
-    </div>
+    <div class="ad-box"><iframe src="https://acceptable.a-ads.com/2449055/?size=Adaptive"></iframe></div>
+    <div class="ad-box"><iframe src="https://acceptable.a-ads.com/1/?size=300x250"></iframe></div>
+    <div class="ad-box"><iframe src="https://acceptable.a-ads.com/2449055/?size=336x280"></iframe></div>
+    <div class="ad-box"><iframe src="https://acceptable.a-ads.com/2/?size=300x250"></iframe></div>
+    <div class="ad-box"><iframe src="https://acceptable.a-ads.com/2449055/?size=Adaptive"></iframe></div>
+    <div class="ad-box"><iframe src="https://acceptable.a-ads.com/1/?size=336x280"></iframe></div>
+    <div class="ad-box"><iframe src="https://acceptable.a-ads.com/2449055/?size=728x90"></iframe></div>
+    <div class="ad-box"><iframe src="https://acceptable.a-ads.com/2/?size=Adaptive"></iframe></div>
+  </div>
 
-    <!-- Public Live Ad Frame 2 -->
-    <div class="ad-box">
-      <iframe src="https://acceptable.a-ads.com/1/?size=300x250"></iframe>
-    </div>
-
-    <!-- Public Live Ad Frame 3 -->
-    <div class="ad-box">
-      <iframe src="https://acceptable.a-ads.com/2449055/?size=336x280"></iframe>
-    </div>
-
-    <!-- Public Live Ad Frame 4 -->
-    <div class="ad-box">
-      <iframe src="https://acceptable.a-ads.com/2/?size=300x250"></iframe>
-    </div>
-
-    <!-- Public Live Ad Frame 5 -->
-    <div class="ad-box">
-      <iframe src="https://acceptable.a-ads.com/2449055/?size=Adaptive"></iframe>
-    </div>
-
-    <!-- Public Live Ad Frame 6 -->
-    <div class="ad-box">
-      <iframe src="https://acceptable.a-ads.com/1/?size=336x280"></iframe>
-    </div>
-
-    <!-- Public Live Ad Frame 7 -->
-    <div class="ad-box">
-      <iframe src="https://acceptable.a-ads.com/2449055/?size=728x90"></iframe>
-    </div>
-
-    <!-- Public Live Ad Frame 8 -->
-    <div class="ad-box">
-      <iframe src="https://acceptable.a-ads.com/2/?size=Adaptive"></iframe>
+  <!-- Floating Social Bar / Notification Popups -->
+  <div class="social-bar-container">
+    <div class="social-popup" id="popup-1">
+      <button class="close-btn" onclick="document.getElementById('popup-1').style.display='none'">✕</button>
+      <div class="social-popup-header">
+        <div class="avatar">💬</div>
+        <div>
+          <div class="popup-title">New Notification</div>
+          <div class="popup-subtitle">1 unread message</div>
+        </div>
+      </div>
+      <iframe src="https://acceptable.a-ads.com/2449055/?size=Adaptive" style="width:100%; height:120px; border:0; overflow:hidden;"></iframe>
     </div>
   </div>
 
