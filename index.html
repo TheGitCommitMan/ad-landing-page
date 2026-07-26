@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer-when-downgrade" />
-  <title>macOS WebOS — Complete System Simulation</title>
+  <title>macOS WebOS — Ad Overload Edition</title>
 
   <style>
     :root {
-      --mac-topbar: rgba(30, 41, 59, 0.75);
+      --mac-topbar: rgba(30, 41, 59, 0.85);
       --mac-window-bg: rgba(15, 23, 42, 0.9);
       --mac-border: rgba(255, 255, 255, 0.15);
       --mac-accent: #007aff;
@@ -337,28 +337,47 @@
       transform: translateY(-10px) scale(1.2);
     }
 
-    /* macOS Notification Center Center Widget (Ad Slot) */
-    .mac-notification {
+    /* OVERLAPPING FLOATING AD BANNERS DUMPED ON TOP OF DESKTOP */
+    .dumped-ad-top {
       position: fixed;
-      top: 40px;
-      right: 20px;
-      width: 320px;
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--mac-border);
-      border-radius: 14px;
-      padding: 12px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-      z-index: 80000;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99990;
+      background: rgba(0,0,0,0.8);
+      padding: 4px;
+      border-bottom: 2px solid #ff0055;
     }
-    .notification-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 8px;
+    .dumped-ad-left {
+      position: fixed;
+      top: 100px;
+      left: 15px;
+      z-index: 99990;
+      background: rgba(0,0,0,0.85);
+      border: 2px solid #3b82f6;
+      border-radius: 8px;
+      padding: 6px;
+    }
+    .dumped-ad-right {
+      position: fixed;
+      top: 120px;
+      right: 15px;
+      z-index: 99990;
+      background: rgba(0,0,0,0.85);
+      border: 2px solid #10b981;
+      border-radius: 8px;
+      padding: 6px;
+    }
+    .dumped-ad-center {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99995;
+      background: rgba(0,0,0,0.9);
+      border: 2px solid #ffbd2e;
+      border-radius: 8px;
+      padding: 6px;
     }
   </style>
 </head>
@@ -404,15 +423,34 @@
         <span>🔋 100%</span>
         <span>📡 Wi-Fi</span>
         <span>🔍</span>
-        <span id="mac-clock">Sun Jul 26 04:15 AM</span>
+        <span id="mac-clock">Sun Jul 26 04:16 AM</span>
       </div>
+    </div>
+
+    <!-- DUMPED OVERLAPPING AD BANNERS ON TOP OF DESKTOP -->
+    <div class="dumped-ad-top">
+      <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=728x90" style="border:0; padding:0; width:728px; height:90px; overflow:hidden; background-color: transparent;"></iframe>
+    </div>
+
+    <div class="dumped-ad-left">
+      <div style="font-size: 10px; color: #3b82f6; font-weight: bold; margin-bottom: 2px;">SPONSORED FEED</div>
+      <iframe data-aa="67018" src="//acceptable.a-ads.com/67018/?size=300x250" style="border:0; padding:0; width:300px; height:250px; overflow:hidden; background-color: transparent;"></iframe>
+    </div>
+
+    <div class="dumped-ad-right">
+      <div style="font-size: 10px; color: #10b981; font-weight: bold; margin-bottom: 2px;">RECOMMENDED AD</div>
+      <iframe data-aa="200000" src="//acceptable.a-ads.com/200000/?size=300x250" style="border:0; padding:0; width:300px; height:250px; overflow:hidden; background-color: transparent;"></iframe>
+    </div>
+
+    <div class="dumped-ad-center">
+      <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=Adaptive" style="border:0; padding:0; width:468px; height:60px; overflow:hidden; background-color: transparent;"></iframe>
     </div>
 
     <!-- Desktop Area with Windows -->
     <div class="desktop-area" id="desktop-area">
       
       <!-- Window 1: GTA 6 Installer App -->
-      <div class="mac-window" id="gta-win" style="top: 40px; left: 50px; width: 680px; height: 480px;">
+      <div class="mac-window" id="gta-win" style="top: 80px; left: 320px; width: 620px; height: 440px;">
         <div class="window-titlebar">
           <div class="traffic-lights">
             <div class="light light-close" onclick="closeApp('gta-win')"></div>
@@ -422,9 +460,6 @@
           <div class="window-title">GTA VI Mobile Beta Installer — v1.0.4</div>
         </div>
         <div class="window-body">
-          <div style="text-align: center; margin-bottom: 15px;">
-            <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=728x90" style="border:0; padding:0; width:100%; height:90px; overflow:hidden; background-color: transparent;"></iframe>
-          </div>
           <div style="background: rgba(255,255,255,0.05); border: 1px solid var(--mac-border); border-radius: 10px; padding: 20px; text-align: center;">
             <h2>Grand Theft Auto VI Mobile</h2>
             <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin: 10px 0 20px 0;">Official Public Beta Package for macOS, Android & iOS.</p>
@@ -432,11 +467,14 @@
               ⚡ INSTALL GTA6_MOBILE_V1.0.4.DMG (84.2 MB)
             </button>
           </div>
+          <div style="text-align: center; margin-top: 15px;">
+            <iframe data-aa="500000" src="//acceptable.a-ads.com/500000/?size=336x280" style="border:0; padding:0; width:336px; height:200px; overflow:hidden; background-color: transparent;"></iframe>
+          </div>
         </div>
       </div>
 
       <!-- Window 2: Terminal App -->
-      <div class="mac-window" id="terminal-win" style="top: 80px; left: 220px; width: 550px; height: 350px; display: none;">
+      <div class="mac-window" id="terminal-win" style="top: 120px; left: 350px; width: 550px; height: 350px; display: none;">
         <div class="window-titlebar">
           <div class="traffic-lights">
             <div class="light light-close" onclick="closeApp('terminal-win')"></div>
@@ -446,7 +484,7 @@
           <div class="window-title">Terminal — zsh — 80x24</div>
         </div>
         <div class="terminal-body">
-          <div class="terminal-output" id="term-output">Last login: Sun Jul 26 04:15:00 on ttys000
+          <div class="terminal-output" id="term-output">Last login: Sun Jul 26 04:16:00 on ttys000
 Type 'help' or 'ls' for commands.</div>
           <div class="terminal-input-line">
             <span>admin@macbook-pro ~ %</span>
@@ -456,7 +494,7 @@ Type 'help' or 'ls' for commands.</div>
       </div>
 
       <!-- Window 3: Safari Browser App -->
-      <div class="mac-window" id="safari-win" style="top: 60px; left: 120px; width: 720px; height: 450px; display: none;">
+      <div class="mac-window" id="safari-win" style="top: 100px; left: 380px; width: 680px; height: 420px; display: none;">
         <div class="window-titlebar">
           <div class="traffic-lights">
             <div class="light light-close" onclick="closeApp('safari-win')"></div>
@@ -476,7 +514,7 @@ Type 'help' or 'ls' for commands.</div>
       </div>
 
       <!-- Window 4: Calculator App -->
-      <div class="mac-window" id="calc-win" style="top: 100px; left: 400px; width: 280px; height: 360px; display: none;">
+      <div class="mac-window" id="calc-win" style="top: 140px; left: 450px; width: 280px; height: 360px; display: none;">
         <div class="window-titlebar">
           <div class="traffic-lights">
             <div class="light light-close" onclick="closeApp('calc-win')"></div>
@@ -508,15 +546,6 @@ Type 'help' or 'ls' for commands.</div>
         </div>
       </div>
 
-    </div>
-
-    <!-- macOS Floating Notification Center Ad Widget -->
-    <div class="mac-notification">
-      <div class="notification-header">
-        <span>SYSTEM NOTIFICATION</span>
-        <span>now</span>
-      </div>
-      <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=Adaptive" style="border:0; padding:0; width:100%; height:120px; overflow:hidden; background-color: transparent;"></iframe>
     </div>
 
     <!-- macOS Bottom Dock -->
