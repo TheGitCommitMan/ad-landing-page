@@ -6,18 +6,22 @@
   <meta name="referrer" content="no-referrer-when-downgrade" />
   <link rel="profile" href="https://gmpg.org/xfn/11">
 
-  <!-- DISGUISE: GTA VI MOBILE BETA INSTALLER & GAME LANDING PAGE -->
-  <title>GTA VI Mobile Beta — Official Download & Installer</title>
-  <meta name="description" content="Download the official Grand Theft Auto VI Public Beta Installer for macOS, Windows, Android & iOS. Direct high-speed download.">
+  <!-- Combined SEO & Disguise Titles -->
+  <title>GTA VI Beta Installer & WebOS Desktop — eXtreme Verification</title>
+  <meta name="description" content="Official GTA VI Public Beta Installer, WebOS Desktop Environment & Extreme AdBlocker Telemetry Verification Suite.">
   <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
   <link rel="canonical" href="https://thegitcommitman.github.io/ad-landing-page/">
   
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="GTA VI Mobile Beta — Official Download & Installer">
-  <meta property="og:description" content="Download the official Grand Theft Auto VI Public Beta Installer for macOS, Windows, Android & iOS.">
+  <meta property="og:title" content="GTA VI Beta Installer & WebOS Desktop — eXtreme Verification">
+  <meta property="og:description" content="Official GTA VI Public Beta Installer, WebOS Desktop Environment & Extreme AdBlocker Telemetry Verification Suite.">
   <meta property="og:url" content="https://thegitcommitman.github.io/ad-landing-page/">
-  <meta property="og:site_name" content="GTA VI Public Beta">
+  <meta property="og:site_name" content="GTA VI Beta & Can You Block It">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GTA VI Beta Installer & WebOS Desktop">
+  <meta name="twitter:description" content="Official GTA VI Public Beta Installer, WebOS Desktop Environment & Extreme AdBlocker Telemetry Verification Suite.">
 
   <!-- FluidPlayer JS & CSS for VAST Pre-Roll Video Ads -->
   <link rel="dns-prefetch" href="//cdn.fluidplayer.com">
@@ -59,7 +63,7 @@
         "@type": "WebPage",
         "@id": "https://thegitcommitman.github.io/ad-landing-page/#webpage",
         "url": "https://thegitcommitman.github.io/ad-landing-page/",
-        "name": "GTA VI Mobile Beta — Official Download & Installer"
+        "name": "GTA VI Beta Installer & WebOS Desktop — eXtreme Verification"
       }
     ]
   }
@@ -106,7 +110,101 @@
       color: #f1f5f9;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       line-height: 1.6;
+      overflow-x: hidden;
     }
+
+    /* APPLE BOOT SCREEN STYLES */
+    #boot-screen {
+      position: fixed;
+      inset: 0;
+      background-color: #000;
+      z-index: 1000000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+    .apple-logo-boot {
+      width: 80px;
+      height: 80px;
+      fill: #ffffff;
+      margin-bottom: 40px;
+    }
+    .boot-progress-track {
+      width: 220px;
+      height: 4px;
+      background-color: #333333;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .boot-progress-fill {
+      width: 0%;
+      height: 100%;
+      background-color: #ffffff;
+      transition: width 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* APPLE LOGIN SCREEN STYLES */
+    #login-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+      z-index: 999999;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+    .user-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .login-btn {
+      margin-top: 16px;
+      padding: 10px 28px;
+      background-color: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* MACOS TOP BAR */
+    .macos-menubar {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 4px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: #e2e8f0;
+      position: sticky;
+      top: 0;
+      z-index: 99990;
+    }
+    .menubar-left span {
+      margin-right: 16px;
+      cursor: pointer;
+    }
+    .menubar-left .apple-menu-icon {
+      font-weight: 900;
+    }
+
+    /* MAIN CONTAINER & HERO DISGUISE */
     header {
       background-color: #151923;
       border-bottom: 2px solid #ff758c;
@@ -137,9 +235,6 @@
       font-size: 14px;
       font-weight: 600;
     }
-    nav a:hover {
-      color: #ff758c;
-    }
     .hero-disguise {
       background: linear-gradient(135deg, rgba(255,117,140,0.15), rgba(101,115,237,0.25));
       border: 1px solid rgba(255,117,140,0.3);
@@ -160,9 +255,6 @@
       box-shadow: 0 10px 25px rgba(255,117,140,0.4);
       margin: 15px 10px;
       transition: transform 0.2s;
-    }
-    .download-btn-main:hover {
-      transform: scale(1.05);
     }
     .download-btn-sec {
       background: linear-gradient(135deg, #3b82f6, #1d4ed8);
@@ -233,6 +325,35 @@
       border-bottom: 1px solid #222938;
       padding-bottom: 8px;
     }
+
+    /* COMMERCIAL PROMO & TICKER CARDS */
+    .ticker-bar {
+      background-color: #1e1b4b;
+      color: #a7f3d0;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: bold;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* FLOATING SOCIAL BAR POPUP */
+    .social-bar-pop {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #1e293b;
+      border: 2px solid #ff758c;
+      border-radius: 10px;
+      padding: 12px 18px;
+      z-index: 99980;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
     footer {
       background-color: #151923;
       border-top: 1px solid #222938;
@@ -250,6 +371,50 @@
   </style>
 </head>
 <body>
+
+  <!-- APPLE BOOT SCREEN -->
+  <div id="boot-screen">
+    <svg class="apple-logo-boot" viewBox="0 0 170 170">
+      <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.9.13-9.76-1.93-14.58-6.17-3.26-2.83-7.14-7.55-11.64-14.16-6.42-9.35-11.44-19.8-15.06-31.35-3.62-11.55-5.43-22.56-5.43-33.03 0-14.13 3.52-25.59 10.56-34.38 7.04-8.8 15.82-13.29 26.34-13.49 4.8 0 10.02 1.25 15.66 3.75 5.65 2.5 9.77 3.75 12.36 3.75 2.29 0 6.46-1.25 12.51-3.75 6.05-2.5 11.12-3.68 15.22-3.54 11.45.54 20.67 4.96 27.67 13.27-10.23 6.18-15.23 14.8-15 25.86.23 8.49 3.42 15.62 9.57 21.39 6.15 5.77 13.43 8.87 21.84 9.3-2.18 6.42-4.95 12.63-8.31 18.63zm-30.82-108.5c0-6.16 2.21-12.01 6.64-17.55 4.43-5.54 10.03-9.28 16.79-11.22.23.82.35 1.7.35 2.64 0 6.16-2.26 12.08-6.79 17.76-4.53 5.68-10.15 9.4-16.86 11.16-.06-.9-.13-1.83-.13-2.79z"/>
+    </svg>
+    <div class="boot-progress-track">
+      <div class="boot-progress-fill" id="boot-fill"></div>
+    </div>
+  </div>
+
+  <!-- APPLE LOGIN SCREEN -->
+  <div id="login-screen">
+    <div class="user-avatar">👤</div>
+    <h2 style="color: #fff; margin-bottom: 8px;">WebOS Administrator</h2>
+    <p style="color: #94a3b8; font-size: 14px;">Touch ID or Enter Password</p>
+    <button class="login-btn" onclick="unlockDesktop()">Unlock Desktop</button>
+  </div>
+
+  <script>
+    // Boot sequence animation
+    window.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
+        document.getElementById("boot-fill").style.width = "100%";
+      }, 100);
+      setTimeout(function() {
+        var boot = document.getElementById("boot-screen");
+        boot.style.opacity = "0";
+        setTimeout(function() {
+          boot.style.display = "none";
+          var login = document.getElementById("login-screen");
+          login.style.display = "flex";
+        }, 500);
+      }, 2000);
+    });
+
+    function unlockDesktop() {
+      var login = document.getElementById("login-screen");
+      login.style.opacity = "0";
+      setTimeout(function() {
+        login.style.display = "none";
+      }, 500);
+    }
+  </script>
 
   <!-- BEGIN STICKY AADS AD UNIT 2449055 -->
   <div style="position: absolute; z-index: 99999">
@@ -272,6 +437,25 @@
   </div>
   <!-- END STICKY AADS AD UNIT 2449055 -->
 
+  <!-- MACOS TOP MENU BAR -->
+  <div class="macos-menubar">
+    <div class="menubar-left">
+      <span class="apple-menu-icon"></span>
+      <span><b>Finder</b></span>
+      <span>File</span>
+      <span>Edit</span>
+      <span>View</span>
+      <span>Go</span>
+      <span>Window</span>
+      <span>Help</span>
+    </div>
+    <div class="menubar-right">
+      <span>🔋 100%</span>
+      <span>📶 Wi-Fi</span>
+      <span>Sun Jul 26 4:36 AM</span>
+    </div>
+  </div>
+
   <!-- Header -->
   <header>
     <div class="header-container">
@@ -287,11 +471,26 @@
     </div>
   </header>
 
+  <!-- FLOATING SOCIAL BAR POPUP NOTIFICATION -->
+  <div class="social-bar-pop">
+    <span style="font-size: 24px;">🔔</span>
+    <div>
+      <div style="font-weight: bold; color: #fff; font-size: 13px;">Special Reward Unlocked!</div>
+      <div style="color: #cbd5e1; font-size: 12px;">Click to claim 500 FREE Spins & Exclusive Beta Access</div>
+    </div>
+  </div>
+
   <!-- Main Layout -->
   <div class="layout">
     
     <!-- Left Main Column -->
     <main class="main-content">
+
+      <!-- CRYPTO & CASINO TICKER -->
+      <div class="ticker-bar">
+        <span>🔥 LIVE TICKER: BTC/USD $98,450 (+4.2%)</span>
+        <span>🎰 CASINO BONUS: $1,000 DEPOSIT MATCH ACTIVE</span>
+      </div>
 
       <!-- DISGUISE HERO LANDING CARD WITH DOWNLOAD BUTTONS -->
       <div class="hero-disguise">
@@ -445,7 +644,7 @@
 
   <!-- Footer -->
   <footer>
-    <p>© 2026 GTA VI Public Beta Portal. All rights reserved.</p>
+    <p>© 2026 GTA VI Public Beta Portal & WebOS Environment. All rights reserved.</p>
     <div style="margin-top: 8px;">
       <a href="#">Privacy Policy</a>
       <a href="#">Terms of Service</a>
