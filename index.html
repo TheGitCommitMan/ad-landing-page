@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer-when-downgrade" />
-  <title>macOS WebOS — Dumped Ad Overload Edition</title>
+  <title>macOS WebOS — Realistic Apple Boot Edition</title>
 
   <style>
     :root {
@@ -28,6 +28,107 @@
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
       background: #000;
       color: #fff;
+    }
+
+    /* 1. REALISTIC APPLE BOOT SCREEN */
+    #boot-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      z-index: 999999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.6s ease-out;
+    }
+    .boot-apple-logo {
+      font-size: 68px;
+      margin-bottom: 45px;
+      color: #fff;
+    }
+    .boot-progress-bg {
+      width: 180px;
+      height: 4px;
+      background: #333;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .boot-progress-fill {
+      width: 0%;
+      height: 100%;
+      background: #fff;
+      border-radius: 2px;
+      transition: width 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* 2. MACOS LOGIN SCREEN */
+    #login-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 50%, #334155, #0f172a);
+      z-index: 99998;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease-out;
+    }
+    .login-avatar {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #007aff, #00d2ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 38px;
+      margin-bottom: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .login-username {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    .login-input-box {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 6px 15px;
+      width: 220px;
+      margin-bottom: 12px;
+    }
+    .login-input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      width: 100%;
+      outline: none;
+      font-size: 13px;
+    }
+    .login-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      padding: 8px 25px;
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: background 0.2s;
+    }
+    .login-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
     }
 
     /* 3. MACOS DESKTOP ENVIRONMENT */
@@ -302,8 +403,26 @@
 </head>
 <body>
 
-  <!-- 3. DESKTOP ENVIRONMENT (INSTANT LOAD) -->
-  <div id="desktop-screen">
+  <!-- 1. REALISTIC APPLE BOOT SCREEN -->
+  <div id="boot-screen">
+    <div class="boot-apple-logo"></div>
+    <div class="boot-progress-bg">
+      <div class="boot-progress-fill" id="boot-fill"></div>
+    </div>
+  </div>
+
+  <!-- 2. MACOS LOGIN SCREEN -->
+  <div id="login-screen" style="display: none; opacity: 0;">
+    <div class="login-avatar">🧑‍💻</div>
+    <div class="login-username">Administrator</div>
+    <div class="login-input-box">
+      <input type="password" class="login-input" placeholder="Enter Password" onkeydown="if(event.key==='Enter') completeLogin()">
+    </div>
+    <button class="login-btn" onclick="completeLogin()">Log In</button>
+  </div>
+
+  <!-- 3. DESKTOP ENVIRONMENT -->
+  <div id="desktop-screen" style="display: none;">
     
     <!-- Top Menu Bar -->
     <div class="mac-menubar">
@@ -327,7 +446,7 @@
         <span>🔋 100%</span>
         <span>📡 Wi-Fi</span>
         <span>🔍</span>
-        <span id="mac-clock">Sun Jul 26 04:16 AM</span>
+        <span id="mac-clock">Sun Jul 26 04:17 AM</span>
       </div>
     </div>
 
@@ -388,7 +507,7 @@
           <div class="window-title">Terminal — zsh — 80x24</div>
         </div>
         <div class="terminal-body">
-          <div class="terminal-output" id="term-output">Last login: Sun Jul 26 04:16:00 on ttys000
+          <div class="terminal-output" id="term-output">Last login: Sun Jul 26 04:17:00 on ttys000
 Type 'help' or 'ls' for commands.</div>
           <div class="terminal-input-line">
             <span>admin@macbook-pro ~ %</span>
@@ -465,6 +584,34 @@ Type 'help' or 'ls' for commands.</div>
   </div>
 
   <script>
+    // SMOOTH REALISTIC APPLE BOOT SEQUENCE (1.8 Seconds)
+    document.addEventListener("DOMContentLoaded", function() {
+      const bootFill = document.getElementById("boot-fill");
+      setTimeout(function() {
+        bootFill.style.width = "100%";
+      }, 50);
+
+      setTimeout(function() {
+        const bs = document.getElementById("boot-screen");
+        bs.style.opacity = "0";
+        setTimeout(function() {
+          bs.style.display = "none";
+          const ls = document.getElementById("login-screen");
+          ls.style.display = "flex";
+          setTimeout(function() { ls.style.opacity = "1"; }, 50);
+        }, 600);
+      }, 1900);
+    });
+
+    function completeLogin() {
+      const ls = document.getElementById("login-screen");
+      ls.style.opacity = "0";
+      setTimeout(function() {
+        ls.style.display = "none";
+        document.getElementById("desktop-screen").style.display = "flex";
+      }, 500);
+    }
+
     // CLOCK & WINDOW CONTROLS
     function updateClock() {
       const now = new Date();
