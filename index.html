@@ -4,219 +4,225 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer-when-downgrade" />
-  <title>eXtreme Test — GTA_6_MOBILE_V1.0.4.APK (DOWNLOAD READY)</title>
+  <title>macOS — GTA 6 Mobile Installer</title>
 
   <style>
+    :root {
+      --mac-topbar: rgba(30, 41, 59, 0.75);
+      --mac-window-bg: rgba(15, 23, 42, 0.85);
+      --mac-border: rgba(255, 255, 255, 0.15);
+      --mac-accent: #007aff;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-    }
-    body {
-      background-color: #0b0c10;
-      color: #c5c6c7;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14px;
-      overflow-x: hidden;
+      user-select: none;
     }
 
-    /* Flashing Alert Top Bar */
-    .alert-marquee {
-      background: #ff0055;
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at 20% 20%, #ff758c, transparent 40%),
+                  radial-gradient(circle at 80% 80%, #ff7eb3, transparent 40%),
+                  radial-gradient(circle at 50% 50%, #6573ed, #141738);
+      background-size: cover;
       color: #fff;
-      font-weight: bold;
-      padding: 8px;
-      text-align: center;
-      font-size: 15px;
-      animation: flashBg 0.8s infinite alternate;
-    }
-    @keyframes flashBg {
-      from { background: #ff0055; }
-      to { background: #cc0000; }
-    }
-    
-    /* Top Header Banner */
-    .top-ad {
-      background: #000;
-      text-align: center;
-      padding: 5px;
-      border-bottom: 2px solid #66fcf1;
-      min-height: 90px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
-    .header-bar {
-      background: #1f2833;
-      padding: 12px 20px;
+    /* macOS Top Menu Bar */
+    .mac-menubar {
+      height: 30px;
+      background: var(--mac-topbar);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 3px solid #45a29e;
-    }
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #66fcf1;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .main-wrapper {
-      max-width: 1100px;
-      margin: 20px auto;
       padding: 0 15px;
-      display: grid;
-      grid-template-columns: 3fr 1fr;
-      gap: 20px;
-      padding-bottom: 80px;
-    }
-
-    .download-card {
-      background: #1f2833;
-      border: 1px solid #45a29e;
-      border-radius: 4px;
-      padding: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      border-bottom: 1px solid var(--mac-border);
       position: relative;
+      z-index: 10000;
     }
-
-    .file-header {
-      border-bottom: 1px solid #45a29e;
-      padding-bottom: 10px;
-      margin-bottom: 15px;
-    }
-    .file-name {
-      color: #66fcf1;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .verified-badge {
-      background: #45a29e;
-      color: #0b0c10;
-      font-weight: bold;
-      padding: 2px 8px;
-      font-size: 11px;
-      border-radius: 2px;
-      display: inline-block;
-      margin-top: 5px;
-    }
-
-    /* Download Buttons Grid */
-    .button-grid {
+    .menubar-left {
       display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin: 20px 0;
+      align-items: center;
+      gap: 18px;
     }
-    
-    .btn-green {
-      background: linear-gradient(180deg, #5cb85c 0%, #4cae4c 100%);
-      border: 2px solid #398439;
-      color: #fff;
-      font-size: 22px;
-      font-weight: bold;
-      padding: 15px 20px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 6px;
-      display: block;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      animation: pulse 1.5s infinite;
-    }
-    .btn-blue {
-      background: linear-gradient(180deg, #337ab7 0%, #2e6da4 100%);
-      border: 2px solid #204d74;
-      color: #fff;
-      font-size: 18px;
-      font-weight: bold;
-      padding: 12px 20px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 6px;
-      display: block;
-    }
-    .btn-orange {
-      background: linear-gradient(180deg, #f0ad4e 0%, #eea236 100%);
-      border: 2px solid #d58512;
-      color: #fff;
+    .apple-logo {
       font-size: 16px;
       font-weight: bold;
-      padding: 10px 15px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 6px;
-      display: block;
     }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-      100% { transform: scale(1); }
-    }
-
-    /* Fake Security Warning Alert */
-    .fake-alert-box {
-      background: #3a0007;
-      border: 2px solid #ff4d4d;
-      padding: 15px;
-      border-radius: 6px;
-      margin: 15px 0;
-      color: #ffcccc;
-    }
-
-    /* Sidebar Ad Slots */
-    .sidebar {
+    .menubar-right {
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 15px;
-    }
-    .side-card {
-      background: #1f2833;
-      border: 1px solid #45a29e;
-      padding: 10px;
-      text-align: center;
-      min-height: 250px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.9);
     }
 
-    /* Sticky Bottom Download Bar */
-    .sticky-bottom-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #1f2833;
-      border-top: 2px solid #66fcf1;
-      padding: 10px;
+    /* Desktop Area */
+    .mac-desktop {
+      height: calc(100vh - 30px - 80px);
+      position: relative;
+      padding: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;
-      z-index: 9990;
     }
 
-    /* Extreme Test Floating Push Notification Widget (From CanYouBlockIt format) */
-    .push-notification-widget {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #1f2833;
-      border: 2px solid #ff0055;
-      border-radius: 8px;
-      padding: 12px;
-      max-width: 320px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.9);
-      z-index: 99999;
-      animation: slideInDown 0.4s ease-out;
+    /* macOS Window */
+    .mac-window {
+      width: 90%;
+      max-width: 960px;
+      height: 85%;
+      background: var(--mac-window-bg);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid var(--mac-border);
+      border-radius: 12px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: popWindow 0.4s ease-out;
     }
-    @keyframes slideInDown {
-      from { transform: translateY(-100px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    @keyframes popWindow {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Window Title Bar */
+    .window-titlebar {
+      height: 38px;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--mac-border);
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      position: relative;
+    }
+    .traffic-lights {
+      display: flex;
+      gap: 8px;
+    }
+    .light {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .light-close { background: #ff5f56; border: 1px solid #e0443e; }
+    .light-min { background: #ffbd2e; border: 1px solid #dea123; }
+    .light-max { background: #27c93f; border: 1px solid #1aab29; }
+    .window-title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Window Content Body */
+    .window-body {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Download Box */
+    .installer-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--mac-border);
+      border-radius: 10px;
+      padding: 25px;
+      text-align: center;
+    }
+    .download-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #007aff, #0051a8);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 14px 35px;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(0, 122, 255, 0.4);
+      transition: transform 0.2s;
+    }
+    .download-btn:hover {
+      transform: scale(1.03);
+    }
+
+    /* macOS Floating Dock */
+    .mac-dock {
+      height: 70px;
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 10000;
+    }
+    .dock-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .dock-icon:hover {
+      transform: translateY(-10px) scale(1.2);
+    }
+
+    /* macOS Notification Center Center Widget (Ad Slot) */
+    .mac-notification {
+      position: fixed;
+      top: 40px;
+      right: 20px;
+      width: 320px;
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--mac-border);
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+    }
+    .notification-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 8px;
     }
   </style>
 
   <script>
-    // Popunder Trigger on First Click anywhere on screen
+    // Popunder Trigger on First Click
     let popunderTriggered = false;
     document.addEventListener("click", function() {
       if (!popunderTriggered) {
@@ -224,98 +230,99 @@
         window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
       }
     });
+
+    // Real-Time macOS Clock
+    function updateClock() {
+      const now = new Date();
+      const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      document.getElementById('mac-clock').innerText = now.toLocaleDateString('en-US', options);
+    }
+    setInterval(updateClock, 1000);
+    document.addEventListener("DOMContentLoaded", updateClock);
   </script>
 </head>
 <body>
 
-  <!-- Flashing Alert Top Bar -->
-  <div class="alert-marquee">
-    ⚠️ EXTREME TEST MODE: HIGH SPEED CDN MIRROR ACTIVATED — ALL AD UNITS ENGAGED ⚠️
+  <!-- macOS Top Menu Bar -->
+  <div class="mac-menubar">
+    <div class="menubar-left">
+      <span class="apple-logo"></span>
+      <span style="font-weight: 700;">Finder</span>
+      <span>File</span>
+      <span>Edit</span>
+      <span>View</span>
+      <span>Go</span>
+      <span>Window</span>
+      <span>Help</span>
+    </div>
+    <div class="menubar-right">
+      <span>🔋 100%</span>
+      <span>📡 Wi-Fi</span>
+      <span>🔍</span>
+      <span id="mac-clock">Sun Jul 26 04:14 AM</span>
+    </div>
   </div>
 
-  <!-- Top Real Ad Slot -->
-  <div class="top-ad">
-    <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=728x90" style="border:0; padding:0; width:728px; height:90px; overflow:hidden; background-color: transparent;"></iframe>
+  <!-- macOS Desktop Body -->
+  <div class="mac-desktop">
+    
+    <!-- Main macOS Window -->
+    <div class="mac-window">
+      <div class="window-titlebar">
+        <div class="traffic-lights">
+          <div class="light light-close"></div>
+          <div class="light light-min"></div>
+          <div class="light light-max"></div>
+        </div>
+        <div class="window-title">GTA VI Mobile Beta Installer — v1.0.4</div>
+      </div>
+
+      <div class="window-body">
+        
+        <!-- Top Ad Leaderboard Inside Window -->
+        <div style="text-align: center;">
+          <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=728x90" style="border:0; padding:0; width:728px; height:90px; overflow:hidden; background-color: transparent;"></iframe>
+        </div>
+
+        <!-- Download Installer Card -->
+        <div class="installer-box">
+          <h2 style="margin-bottom: 8px;">Grand Theft Auto VI Mobile</h2>
+          <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin-bottom: 20px;">
+            Official Public Beta Package for macOS, Android & iOS. Verified Virus-Free by Gatekeeper.
+          </p>
+
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="download-btn">
+            ⚡ INSTALL GTA6_MOBILE_V1.0.4.DMG (84.2 MB)
+          </a>
+        </div>
+
+        <!-- Secondary Ad Grid Inside Window -->
+        <div style="display: flex; gap: 20px; justify-content: center;">
+          <iframe data-aa="67018" src="//acceptable.a-ads.com/67018/?size=300x250" style="border:0; padding:0; width:300px; height:250px; overflow:hidden; background-color: transparent;"></iframe>
+          <iframe data-aa="200000" src="//acceptable.a-ads.com/200000/?size=300x250" style="border:0; padding:0; width:300px; height:250px; overflow:hidden; background-color: transparent;"></iframe>
+        </div>
+
+      </div>
+    </div>
   </div>
 
-  <!-- Header -->
-  <div class="header-bar">
-    <div class="logo">🚀 APK-MIRROR-X (eXtreme Mode)</div>
-    <div style="font-size: 12px; color: #45a29e;">SERVER STATUS: ONLINE (HIGH SPEED)</div>
-  </div>
-
-  <!-- Floating Push Notification Box (CanYouBlockIt Style) -->
-  <div class="push-notification-widget" id="push-notification">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-      <span style="color: #ff0055; font-weight: bold; font-size: 12px;">🔔 EXTREME PUSH NOTIFICATION</span>
-      <button onclick="document.getElementById('push-notification').style.display='none'" style="background:none; border:none; color:#c5c6c7; cursor:pointer;">✕</button>
+  <!-- macOS Floating Notification Center Ad Widget -->
+  <div class="mac-notification">
+    <div class="notification-header">
+      <span>SYSTEM NOTIFICATION</span>
+      <span>now</span>
     </div>
     <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=Adaptive" style="border:0; padding:0; width:100%; height:120px; overflow:hidden; background-color: transparent;"></iframe>
   </div>
 
-  <!-- Main Content Area -->
-  <div class="main-wrapper">
-    <div class="download-card">
-      <div class="file-header">
-        <div class="file-name">📄 GTA_6_FULL_MOBILE_BETA_V1.0.4.APK</div>
-        <span class="verified-badge">✔ VIRUS-FREE (SCANNED BY KASPERSKY)</span>
-        <div style="margin-top: 8px; font-size: 12px;">FILE SIZE: 84.2 MB | UPLOADED: TODAY | DOWNLOADS: 2,491,029</div>
-      </div>
-
-      <!-- In-Content Real Ad Banner -->
-      <div style="text-align: center; margin: 15px 0;">
-        <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=Adaptive" style="border:0; padding:0; width:100%; height:120px; overflow:hidden; background-color: transparent;"></iframe>
-      </div>
-
-      <!-- Fake Security Warning Alert -->
-      <div class="fake-alert-box">
-        <div style="font-weight: bold; color: #ff4d4d; font-size: 16px; margin-bottom: 5px;">
-          🛡 EXTREME ADBLOCKER TEST SUITE ACTIVE
-        </div>
-        <div>Testing AdBlock, uBlock Origin, Brave Shields, Pi-Hole, and Ghostery filters against active ad networks.</div>
-      </div>
-
-      <!-- Download Buttons Grid -->
-      <div class="button-grid">
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn-green">
-          ⬇ DOWNLOAD NOW (DIRECT SERVER 1 - FAST)
-        </a>
-
-        <!-- Middle Real Ad Slot -->
-        <div style="text-align: center;">
-          <iframe data-aa="67018" src="//acceptable.a-ads.com/67018/?size=300x250" style="border:0; padding:0; width:300px; height:250px; overflow:hidden; background-color: transparent;"></iframe>
-        </div>
-
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn-blue">
-          ⚡ HIGH SPEED MIRROR (NO ADS / NO WAITING)
-        </a>
-
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn-orange">
-          📦 ALTERNATIVE OBB DATA ZIP (MIRROR 2)
-        </a>
-      </div>
-    </div>
-
-    <!-- Sidebar Column -->
-    <div class="sidebar">
-      <div class="side-card">
-        <div style="font-size: 11px; margin-bottom: 5px; color: #45a29e;">SPONSORED LINK</div>
-        <iframe data-aa="200000" src="//acceptable.a-ads.com/200000/?size=300x250" style="border:0; padding:0; width:100%; height:250px; overflow:hidden; background-color: transparent;"></iframe>
-      </div>
-
-      <div class="side-card">
-        <div style="font-size: 11px; margin-bottom: 5px; color: #45a29e;">ADVERTISEMENT</div>
-        <iframe data-aa="500000" src="//acceptable.a-ads.com/500000/?size=336x280" style="border:0; padding:0; width:100%; height:250px; overflow:hidden; background-color: transparent;"></iframe>
-      </div>
-    </div>
-  </div>
-
-  <!-- Sticky Bottom Bar -->
-  <div class="sticky-bottom-bar">
-    <span style="font-size: 13px; font-weight: bold; color: #66fcf1;">GTA_6_MOBILE_V1.0.4.APK Ready</span>
-    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" style="background: #5cb85c; color: #fff; text-decoration: none; padding: 8px 20px; font-weight: bold; border-radius: 4px;">
-      ⚡ START DOWNLOAD NOW
-    </a>
+  <!-- macOS Bottom Dock -->
+  <div class="mac-dock">
+    <div class="dock-icon" title="Finder">📁</div>
+    <div class="dock-icon" title="Safari">🌐</div>
+    <div class="dock-icon" title="Terminal">💻</div>
+    <div class="dock-icon" title="System Settings">⚙️</div>
+    <div class="dock-icon" title="Downloads">📥</div>
+    <div class="dock-icon" title="Trash">🗑️</div>
   </div>
 
 </body>
