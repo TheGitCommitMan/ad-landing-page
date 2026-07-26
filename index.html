@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer-when-downgrade" />
-  <title>macOS WebOS — Ad Overload Edition</title>
+  <title>macOS WebOS — Dumped Ad Overload Edition</title>
 
   <style>
     :root {
@@ -28,87 +28,6 @@
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
       background: #000;
       color: #fff;
-    }
-
-    /* 1. BOOT SCREEN */
-    #boot-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #000;
-      z-index: 999999;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.8s ease-out;
-    }
-    .boot-apple-logo {
-      font-size: 72px;
-      margin-bottom: 40px;
-      color: #fff;
-    }
-    .boot-progress-bg {
-      width: 220px;
-      height: 5px;
-      background: #333;
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .boot-progress-fill {
-      width: 0%;
-      height: 100%;
-      background: #fff;
-      transition: width 0.1s linear;
-    }
-
-    /* 2. LOGIN SCREEN */
-    #login-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(circle at 50% 50%, #4a5568, #1a202c);
-      z-index: 99998;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.5s ease-out;
-    }
-    .login-avatar {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #007aff, #00d2ff);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 40px;
-      margin-bottom: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    }
-    .login-username {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-    .login-btn {
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: #fff;
-      padding: 10px 30px;
-      border-radius: 20px;
-      font-size: 14px;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      transition: background 0.2s;
-    }
-    .login-btn:hover {
-      background: rgba(255, 255, 255, 0.4);
     }
 
     /* 3. MACOS DESKTOP ENVIRONMENT */
@@ -344,7 +263,7 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 99990;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.85);
       padding: 4px;
       border-bottom: 2px solid #ff0055;
     }
@@ -383,23 +302,8 @@
 </head>
 <body>
 
-  <!-- 1. BOOT SCREEN -->
-  <div id="boot-screen">
-    <div class="boot-apple-logo"></div>
-    <div class="boot-progress-bg">
-      <div class="boot-progress-fill" id="boot-fill"></div>
-    </div>
-  </div>
-
-  <!-- 2. LOGIN SCREEN -->
-  <div id="login-screen" style="display: none; opacity: 0;">
-    <div class="login-avatar">🧑‍💻</div>
-    <div class="login-username">Administrator</div>
-    <button class="login-btn" onclick="completeLogin()">Click to Login</button>
-  </div>
-
-  <!-- 3. DESKTOP ENVIRONMENT -->
-  <div id="desktop-screen" style="display: none;">
+  <!-- 3. DESKTOP ENVIRONMENT (INSTANT LOAD) -->
+  <div id="desktop-screen">
     
     <!-- Top Menu Bar -->
     <div class="mac-menubar">
@@ -561,37 +465,6 @@ Type 'help' or 'ls' for commands.</div>
   </div>
 
   <script>
-    // BOOT SEQUENCE SIMULATION
-    let progress = 0;
-    const bootFill = document.getElementById("boot-fill");
-    const bootInterval = setInterval(function() {
-      progress += Math.floor(Math.random() * 15) + 5;
-      if (progress >= 100) {
-        progress = 100;
-        clearInterval(bootInterval);
-        setTimeout(function() {
-          const bs = document.getElementById("boot-screen");
-          bs.style.opacity = "0";
-          setTimeout(function() {
-            bs.style.display = "none";
-            const ls = document.getElementById("login-screen");
-            ls.style.display = "flex";
-            setTimeout(function() { ls.style.opacity = "1"; }, 50);
-          }, 800);
-        }, 300);
-      }
-      bootFill.style.width = progress + "%";
-    }, 120);
-
-    function completeLogin() {
-      const ls = document.getElementById("login-screen");
-      ls.style.opacity = "0";
-      setTimeout(function() {
-        ls.style.display = "none";
-        document.getElementById("desktop-screen").style.display = "flex";
-      }, 500);
-    }
-
     // CLOCK & WINDOW CONTROLS
     function updateClock() {
       const now = new Date();
@@ -599,6 +472,7 @@ Type 'help' or 'ls' for commands.</div>
       document.getElementById('mac-clock').innerText = now.toLocaleDateString('en-US', options);
     }
     setInterval(updateClock, 1000);
+    document.addEventListener("DOMContentLoaded", updateClock);
 
     function openApp(id) {
       const win = document.getElementById(id);
