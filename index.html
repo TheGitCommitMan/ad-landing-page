@@ -17,6 +17,7 @@
       color: #c5c6c7;
       font-family: Arial, Helvetica, sans-serif;
       font-size: 14px;
+      overflow-x: hidden;
     }
     
     /* Top Header Banner */
@@ -25,6 +26,7 @@
       text-align: center;
       padding: 5px;
       border-bottom: 2px solid #66fcf1;
+      min-height: 90px;
     }
 
     .header-bar {
@@ -50,6 +52,7 @@
       display: grid;
       grid-template-columns: 3fr 1fr;
       gap: 20px;
+      padding-bottom: 80px;
     }
 
     .download-card {
@@ -144,7 +147,7 @@
       color: #66fcf1;
     }
 
-    /* Fake Comments Section */
+    /* Comments Section */
     .comments-section {
       margin-top: 30px;
       border-top: 1px solid #45a29e;
@@ -173,6 +176,7 @@
       border: 1px solid #45a29e;
       padding: 10px;
       text-align: center;
+      min-height: 270px;
     }
 
     /* Sticky Bottom Download Bar */
@@ -188,16 +192,78 @@
       justify-content: center;
       align-items: center;
       gap: 20px;
+      z-index: 9990;
+    }
+
+    /* Floating Social Popup Bar */
+    .social-popup-bar {
+      position: fixed;
+      bottom: 60px;
+      right: 20px;
       z-index: 9999;
+      background: #1f2833;
+      border: 2px solid #66fcf1;
+      border-radius: 8px;
+      padding: 12px;
+      max-width: 320px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      animation: popupSlide 0.5s ease-out;
+    }
+    .social-popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .popup-badge {
+      font-size: 11px;
+      font-weight: bold;
+      color: #66fcf1;
+      text-transform: uppercase;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      color: #c5c6c7;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    @keyframes popupSlide {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
   </style>
+
+  <script>
+    // Pool of domain-agnostic ad frame URLs
+    const adPool = [
+      "https://acceptable.a-ads.com/2449055/?size=Adaptive",
+      "https://acceptable.a-ads.com/1/?size=300x250",
+      "https://acceptable.a-ads.com/2/?size=300x250",
+      "https://acceptable.a-ads.com/2449055/?size=728x90",
+      "https://acceptable.a-ads.com/1/?size=336x280",
+      "https://acceptable.a-ads.com/2/?size=Adaptive"
+    ];
+
+    function getRandomAd() {
+      return adPool[Math.floor(Math.random() * adPool.length)];
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // Inject random ads into all slots
+      document.getElementById("top-ad-slot").innerHTML = `<iframe src="${getRandomAd()}" style="width:728px; height:90px; border:0; overflow:hidden;"></iframe>`;
+      document.getElementById("in-content-ad-slot").innerHTML = `<iframe src="${getRandomAd()}" style="width:100%; height:150px; border:0; overflow:hidden;"></iframe>`;
+      document.getElementById("middle-ad-slot").innerHTML = `<iframe src="${getRandomAd()}" style="width:300px; height:250px; border:0; overflow:hidden;"></iframe>`;
+      document.getElementById("sidebar-ad-1").innerHTML = `<iframe src="${getRandomAd()}" style="width:100%; height:250px; border:0; overflow:hidden;"></iframe>`;
+      document.getElementById("sidebar-ad-2").innerHTML = `<iframe src="${getRandomAd()}" style="width:100%; height:250px; border:0; overflow:hidden;"></iframe>`;
+      document.getElementById("social-popup-ad-slot").innerHTML = `<iframe src="${getRandomAd()}" style="width:100%; height:120px; border:0; overflow:hidden;"></iframe>`;
+    });
+  </script>
 </head>
 <body>
 
   <!-- Top Ad Slot -->
-  <div class="top-ad">
-    <iframe src="https://acceptable.a-ads.com/2449055/?size=728x90" style="width:728px; height:90px; border:0; overflow:hidden;"></iframe>
-  </div>
+  <div class="top-ad" id="top-ad-slot"></div>
 
   <!-- Header -->
   <div class="header-bar">
@@ -214,26 +280,22 @@
         <div style="margin-top: 8px; font-size: 12px;">FILE SIZE: 84.2 MB | UPLOADED: TODAY | DOWNLOADS: 2,491,029</div>
       </div>
 
-      <!-- Top Ad Banner Inside Container -->
-      <div style="text-align: center; margin: 15px 0;">
-        <iframe src="https://acceptable.a-ads.com/2449055/?size=Adaptive" style="width:100%; height:120px; border:0; overflow:hidden;"></iframe>
-      </div>
+      <!-- In-Content Ad Banner -->
+      <div style="text-align: center; margin: 15px 0;" id="in-content-ad-slot"></div>
 
-      <!-- Fake Countdown Timer -->
+      <!-- Countdown Timer Box -->
       <div class="timer-box" id="timer">
         ⏳ Your direct download link is ready! Click below:
       </div>
 
-      <!-- Multiple Confusing Download Buttons -->
+      <!-- Download Buttons Grid -->
       <div class="button-grid">
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn-green">
           ⬇ DOWNLOAD NOW (DIRECT SERVER 1 - FAST)
         </a>
 
-        <!-- Ad Slot Separator -->
-        <div style="text-align: center;">
-          <iframe src="https://acceptable.a-ads.com/1/?size=300x250" style="width:300px; height:250px; border:0; overflow:hidden;"></iframe>
-        </div>
+        <!-- Middle Ad Slot Separator -->
+        <div style="text-align: center;" id="middle-ad-slot"></div>
 
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn-blue">
           ⚡ HIGH SPEED MIRROR (NO ADS / NO WAITING)
@@ -244,7 +306,7 @@
         </a>
       </div>
 
-      <!-- Fake Comments Section -->
+      <!-- User Reviews Section -->
       <div class="comments-section">
         <h4 style="color: #66fcf1; margin-bottom: 10px;">USER REVIEWS (4.9 / 5.0 STAR RATING)</h4>
         
@@ -270,14 +332,23 @@
     <div class="sidebar">
       <div class="side-card">
         <div style="font-size: 11px; margin-bottom: 5px; color: #45a29e;">SPONSORED LINK</div>
-        <iframe src="https://acceptable.a-ads.com/2/?size=300x250" style="width:100%; height:250px; border:0; overflow:hidden;"></iframe>
+        <div id="sidebar-ad-1"></div>
       </div>
 
       <div class="side-card">
         <div style="font-size: 11px; margin-bottom: 5px; color: #45a29e;">ADVERTISEMENT</div>
-        <iframe src="https://acceptable.a-ads.com/2449055/?size=Adaptive" style="width:100%; height:200px; border:0; overflow:hidden;"></iframe>
+        <div id="sidebar-ad-2"></div>
       </div>
     </div>
+  </div>
+
+  <!-- Floating Social Popup Bar -->
+  <div class="social-popup-bar" id="social-popup-widget">
+    <div class="social-popup-header">
+      <span class="popup-badge">🔔 RECOMMENDED FOR YOU</span>
+      <button class="close-btn" onclick="document.getElementById('social-popup-widget').style.display='none'">✕</button>
+    </div>
+    <div id="social-popup-ad-slot"></div>
   </div>
 
   <!-- Sticky Bottom Bar -->
