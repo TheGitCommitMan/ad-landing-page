@@ -7,7 +7,7 @@
   <link rel="profile" href="https://gmpg.org/xfn/11">
 
   <!-- Search Engine Optimization Meta Tags -->
-  <title>eXtreme Test — Infrastructure & Ad Verification</title>
+  <title>eXtreme Test — Infrastructure & Ad Verification Suite</title>
   <meta name="description" content="An extreme version of the Adblock test with various formats from popular ad networks. Use it to test adblockers like AdBlock, AdBlock Plus, AdBlocker Ultimate, AdGuard, Ghostery, uBlock Origin, Pi-Hole, NoScript and more.">
   <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
   <link rel="canonical" href="https://thegitcommitman.github.io/ad-landing-page/">
@@ -22,6 +22,10 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="eXtreme Test — Infrastructure & Ad Verification">
   <meta name="twitter:description" content="An extreme version of the Adblock test with various formats from popular ad networks.">
+
+  <!-- FluidPlayer JS & CSS for VAST Pre-Roll Video Ads -->
+  <link rel="dns-prefetch" href="//cdn.fluidplayer.com">
+  <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
 
   <!-- USER META PIXEL SNIPPET (ID: 28324185170522975) -->
   <script>
@@ -290,6 +294,23 @@
       <!-- USER A-ADS UNIT 1: 728x90 (2449055) -->
       <div class="ad-container">
         <iframe data-aa="2449055" src="//acceptable.a-ads.com/2449055/?size=728x90" style="border:0; padding:0; width:728px; height:90px; overflow:hidden; background-color: transparent;"></iframe>
+      </div>
+
+      <!-- FLUIDPLAYER VAST PRE-ROLL VIDEO AD PLAYER -->
+      <div class="ad-container">
+        <div style="width: 100%; max-width: 640px; margin: 0 auto;">
+          <video id="fp-video-0" style="width: 100%; height: 360px;">
+            <source src="https://cdn.fluidplayer.com/videos/sample.mp4" type="video/mp4"/>
+          </video>
+        </div>
+        <script>
+          var vast_options = {"adList":[{"roll":"preRoll","vastTag":"https:\/\/12ezo5v60.com\/ceef\/gdt3g0\/tbt\/1754290\/tlk.xml"}]};
+          document.addEventListener("DOMContentLoaded", function() {
+            if (typeof fluidPlayer !== 'undefined') {
+              fluidPlayer('fp-video-0', { vastOptions: vast_options });
+            }
+          });
+        </script>
       </div>
 
       <article class="article-card">
